@@ -3,6 +3,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import NaveBar from "./components/headers/NaveBar";
 import MoviesLists from "./pages/MoviesLists";
+import MovieDetails from "./pages/MovieDetails";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<MoviesLists />} />
         <Route path="/top_rated" element={<MoviesLists />} />
         <Route path="/upcoming" element={<MoviesLists />} />
+        <Route path="/moviedetail/:movieId" element={<MovieDetails />} />
       </Routes>
     </>
   );

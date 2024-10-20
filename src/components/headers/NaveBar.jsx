@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { v4 } from "uuid";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { MoviesContext } from "../../context/moviesContextProvider";
+import axios from "axios";
 
 function NaveBar() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchMovies = (el) => {
+    el.preventDefault();
+    const searchData = new FormData(el.target);
+    const { search } = Object.fromEntries(searchData);
+    setSearchParams({ search });
+  };
+
   const LinksConstant = [
     { id: v4(), lName: "Popular", url: "/" },
     { id: v4(), lName: "Top Rated", url: "/top_rated" },
@@ -19,18 +29,12 @@ function NaveBar() {
             </li>
           ))}
         </ul>
-        <div className="flex w-full gap-2">
-          <input
-            className="w-full"
-            onChange={({ target: { textContent } }) => {}}
-            type="search"
-            name="search"
-            id=""
-          />
+        <form onSubmit={searchMovies} className="flex w-full gap-2">
+          <input className="w-full p-2" type="search" name="search" id="" />
           <button className="bg-slate-300 p-1 px-2 rounded" type="submit">
             Search
           </button>
-        </div>
+        </form>
       </nav>
     </header>
   );

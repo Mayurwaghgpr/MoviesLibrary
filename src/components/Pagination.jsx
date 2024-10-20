@@ -1,22 +1,20 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 
 function Pagination({ totalPages, page, setPage }) {
-  const moveToPage = useCallback(
-    (e) => {
-      if (e === "next" && page <= totalPages) {
-        setPage((prev) => prev + 1);
-      } else {
-        setPage((prev) => prev - 1);
-      }
-    },
-    [page]
-  );
+  const moveToPage = (e) => {
+    console.log({ e });
+    if (e === "next" && page <= totalPages) {
+      setPage((prev) => prev + 1);
+    } else {
+      setPage((prev) => prev - 1);
+    }
+  };
   return (
     <div className="relative flex m-10 sm:w-[40rem] w-full">
       {page > 1 && (
         <span
           onClick={() => moveToPage("prev")}
-          className="border mx-1 px-3 py-1 absolute left-0 z-10 bg-white cursor-pointer"
+          className="border mx-1 px-3 py-1 absolute left-0 z-10 rounded-full b bg-gray-300 cursor-pointer"
         >
           prev
         </span>
@@ -30,7 +28,7 @@ function Pagination({ totalPages, page, setPage }) {
               onClick={() => {
                 setPage(idx + 1);
               }}
-              className={`border px-3 py-1 cursor-pointer ${
+              className={`border px-3 py-1 rounded-full  cursor-pointer ${
                 page === idx + 1 ? "bg-slate-200" : ""
               }`}
             >
@@ -43,7 +41,7 @@ function Pagination({ totalPages, page, setPage }) {
       {page !== totalPages && (
         <span
           onClick={() => moveToPage("next")}
-          className="border px-3 py-1 absolute right-0 z-10 bg-white cursor-pointer"
+          className="border px-3 py-1 absolute right-0 z-10 rounded-full bg-gray-300 cursor-pointer"
         >
           next
         </span>
